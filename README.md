@@ -1,4 +1,6 @@
-# Nodepad--
+# Group Name: Nodepad--
+
+# Edmonton Public Library Ticketing System
 
 ## Group Members:
 * [Jack Staples](https://github.com/JackStaples)
