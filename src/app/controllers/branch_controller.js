@@ -55,7 +55,7 @@ exports.mytickets = function(req, res){
   
   connection.connect(function(err) {
     
-    var myVar, myVar2, myVar3;
+    var closedTickets, openTickets, allTickets;
     if (err) throw err
       
       //grab the closed tickets depending on the logged in user
@@ -63,7 +63,7 @@ exports.mytickets = function(req, res){
       connection.query(closedQueryString, function(err, result) {
 
         if (err) throw err
-            myVar = JSON.stringify(result);
+            closedTickets = JSON.stringify(result);
 
     });
     if (err) throw err
@@ -72,7 +72,7 @@ exports.mytickets = function(req, res){
       connection.query(openQueryString, function(err, result) {
 
         if (err) throw err
-            myVar2 = JSON.stringify(result);
+            openTickets = JSON.stringify(result);
     });
     
     if (err) throw err
@@ -80,11 +80,11 @@ exports.mytickets = function(req, res){
     //Grab all the tickets depending on logged in user
       connection.query(allQueryString, function(err, result) {
         if (err) throw err
-            myVar3 = JSON.stringify(result);
+            allTickets = JSON.stringify(result);
             res.render((__dirname + '/../../public/views/branchtickets.ejs'), {
-            allTickets:myVar3,
-            openTickets:myVar2,
-            closedTickets:myVar,
+            allTickets:allTickets,
+            openTickets:openTickets,
+            closedTickets:closedTickets,
             username:req.user.username,
             branch:req.user.Site,
             
