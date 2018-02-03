@@ -22,8 +22,9 @@ exports.home = function(req, res){
   });
   
   connection.connect(function(err) {
-    
-    var myVar3;
+    var branch;
+    var announ;
+    var openTickets;
     if (err) throw err
       //Get the announcements
     connection.query('SELECT AID, Title, Announcement, SubmittedDate from 395project.announcements Order by AID Desc Limit 3;', function(err, announcementsRes){
@@ -38,11 +39,11 @@ exports.home = function(req, res){
           var connectionString = changeBranchString(req.user.Site);
             connection.query(connectionString, function(err, branchResult) {
             announ = JSON.stringify(announcementsRes);
-            myVar3 = JSON.stringify(result);
+            openTickets = JSON.stringify(result);
             branch = JSON.stringify(branchResult);
             res.render((__dirname + '/../../public/views/home.ejs'), {
             
-            openTickets:myVar3,
+            openTickets:openTickets,
             branchTickets:branch,
             username:req.user.username,
             announcements:announ,
